@@ -65,18 +65,6 @@ h1 .neon{color:var(--yellow);text-shadow:0 0 6px rgba(255,210,63,.9),0 0 22px rg
 .micro{margin-top:12px;font-size:13px;color:#cfa99b}
 .micro b{color:#fff}
 
-/* contagem */
-.count{margin-top:30px;padding:18px 14px;border-radius:18px;
-  background:linear-gradient(180deg,rgba(255,122,26,.12),rgba(166,26,29,.18));
-  border:1px solid rgba(255,122,26,.4)}
-.count p{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--yellow);font-weight:800}
-.timer{display:flex;justify-content:center;gap:10px;margin-top:12px}
-.timer div{min-width:66px;padding:10px 0;border-radius:12px;background:#120303;border:1px solid rgba(255,122,26,.5);
-  box-shadow:0 0 14px rgba(255,122,26,.25) inset}
-.timer span{display:block;font-size:30px;font-weight:900;color:#fff;font-variant-numeric:tabular-nums;
-  text-shadow:0 0 12px rgba(255,122,26,.9)}
-.timer small{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#d9b4a5}
-
 /* benefícios */
 section{padding:44px 0 0}
 h2{font-size:24px;font-weight:900;text-align:center;line-height:1.15}
@@ -137,16 +125,6 @@ footer a{color:#e9c9bd}
       Quero entrar no grupo VIP
     </a>
     <p class="micro">✅ Grátis · ✅ Sem spam · ✅ Saia quando quiser · <b>Vagas limitadas</b></p>
-
-    <div class="count">
-      <p>Faltam para a Black Friday</p>
-      <div class="timer" id="timer" aria-live="off">
-        <div><span id="d">--</span><small>dias</small></div>
-        <div><span id="h">--</span><small>horas</small></div>
-        <div><span id="m">--</span><small>min</small></div>
-        <div><span id="s">--</span><small>seg</small></div>
-      </div>
-    </div>
   </div>
 
   <section>
@@ -196,7 +174,6 @@ footer a{color:#e9c9bd}
 <script>
 /* ===== CONFIG ===== */
 var PIXEL_ID = "2049137302436928";         // ID do Pixel da Meta
-var BLACK_FRIDAY = new Date("2026-11-27T00:00:00-03:00"); // Black Friday 2026
 
 /* ===== Meta Pixel (só carrega se PIXEL_ID estiver preenchido) ===== */
 if (PIXEL_ID) {
@@ -210,20 +187,6 @@ document.querySelectorAll('.js-cta').forEach(function(a){
     if (window.fbq) { fbq('track', 'Lead', {content_name: 'Grupo VIP Black Friday', button: a.id}); }
   });
 });
-
-/* ===== Contagem regressiva ===== */
-(function(){
-  var el = {d:document.getElementById('d'),h:document.getElementById('h'),m:document.getElementById('m'),s:document.getElementById('s')};
-  function pad(n){return String(n).padStart(2,'0')}
-  function tick(){
-    var diff = Math.max(0, BLACK_FRIDAY - new Date());
-    el.d.textContent = pad(Math.floor(diff/864e5));
-    el.h.textContent = pad(Math.floor(diff%864e5/36e5));
-    el.m.textContent = pad(Math.floor(diff%36e5/6e4));
-    el.s.textContent = pad(Math.floor(diff%6e4/1e3));
-  }
-  tick(); setInterval(tick, 1000);
-})();
 
 /* ===== Barra fixa aparece depois do primeiro botão ===== */
 (function(){
